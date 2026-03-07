@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Adly Commercials — Motion Design for SaaS</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root { --black:#080808; --white:#f5f5f0; --grey:#888; --border:rgba(255,255,255,0.08); }
+  *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{background:var(--black);color:var(--white);font-family:'DM Sans',sans-serif;font-weight:300;overflow-x:hidden;cursor:none}
+  .cursor{width:10px;height:10px;background:var(--white);border-radius:50%;position:fixed;pointer-events:none;z-index:9999;transform:translate(-50%,-50%)}
+  .cursor-follower{width:36px;height:36px;border:1px solid rgba(255,255,255,0.4);border-radius:50%;position:fixed;pointer-events:none;z-index:9998;transition:transform .4s ease,width .3s,height .3s;transform:translate(-50%,-50%)}
+  body::after{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.035'/%3E%3C/svg%3E");pointer-events:none;z-index:100;opacity:0.5}
+  nav{position:fixed;top:0;left:0;right:0;z-index:50;padding:24px 48px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid transparent;transition:border-color .3s,background .3s}
+  nav.scrolled{border-color:var(--border);background:rgba(8,8,8,0.9);backdrop-filter:blur(12px)}
+  .nav-logo{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:.12em;text-decoration:none;color:var(--white);display:flex;align-items:center}
+  .nav-links{display:flex;gap:36px;list-style:none}
+  .nav-links a{color:var(--grey);text-decoration:none;font-size:13px;letter-spacing:.06em;text-transform:uppercase;transition:color .2s}
+  .nav-links a:hover{color:var(--white)}
+  .nav-cta{background:var(--white);color:var(--black)!important;padding:10px 22px;border-radius:100px;font-weight:500!important;font-size:13px!important;transition:opacity .2s!important}
+  .nav-cta:hover{opacity:.85}
+  #hero{min-height:100vh;display:flex;flex-direction:column;justify-content:flex-end;padding:0 48px 72px;position:relative;overflow:hidden}
+  .hero-eyebrow{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--grey);margin-bottom:24px;opacity:0;animation:fadeUp .8s .3s forwards}
+  .hero-headline{font-family:'Bebas Neue',sans-serif;font-size:clamp(72px,11vw,160px);line-height:.92;letter-spacing:.01em;opacity:0;animation:fadeUp .9s .5s forwards}
+  .hero-headline em{font-family:'Instrument Serif',serif;font-style:italic;font-size:.88em}
+  .hero-sub{margin-top:40px;display:flex;align-items:flex-end;justify-content:space-between;gap:24px;opacity:0;animation:fadeUp .9s .8s forwards}
+  .hero-tagline{max-width:480px;font-size:16px;line-height:1.65;color:rgba(245,245,240,0.6)}
+  .hero-tagline strong{color:var(--white);font-weight:400;font-style:italic}
+  .hero-actions{display:flex;gap:16px;flex-shrink:0}
+  .btn-primary{background:var(--white);color:var(--black);padding:14px 32px;border-radius:100px;text-decoration:none;font-size:14px;font-weight:500;transition:opacity .2s,transform .2s;white-space:nowrap}
+  .btn-primary:hover{opacity:.88;transform:translateY(-1px)}
+  .btn-ghost{border:1px solid var(--border);color:var(--white);padding:14px 32px;border-radius:100px;text-decoration:none;font-size:14px;transition:border-color .2s,transform .2s;white-space:nowrap}
+  .btn-ghost:hover{border-color:rgba(255,255,255,0.3);transform:translateY(-1px)}
+  .hero-scroll-line{position:absolute;bottom:72px;right:48px;display:flex;flex-direction:column;align-items:center;gap:10px;opacity:0;animation:fadeIn 1s 1.2s forwards}
+  .hero-scroll-line span{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--grey);writing-mode:vertical-rl}
+  .scroll-line{width:1px;height:60px;background:linear-gradient(to bottom,var(--grey),transparent);animation:scrollPulse 2s ease-in-out infinite}
+  .marquee-section{border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:18px 0;overflow:hidden;white-space:nowrap}
+  .marquee-track{display:inline-flex;animation:marquee 20s linear infinite}
+  .marquee-item{font-family:'Bebas Neue',sans-serif;font-size:13px;letter-spacing:.18em;color:var(--grey);padding:0 40px}
+  .marquee-dot{color:var(--white);margin-right:40px}
+  section{padding:120px 48px}
+  .section-label{font-size:10px;letter-spacing:.25em;text-transform:uppercase;color:var(--grey);margin-bottom:64px;display:flex;align-items:center;gap:16px}
+  .section-label::after{content:'';flex:1;max-width:60px;height:1px;background:var(--border)}
+  #about{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start}
+  .about-left .section-label{margin-bottom:40px}
+  .about-heading{font-family:'Bebas Neue',sans-serif;font-size:clamp(48px,5vw,72px);line-height:.95;letter-spacing:.02em}
+  .about-heading em{font-family:'Instrument Serif',serif;font-style:italic}
+  .about-right{padding-top:60px}
+  .about-body{font-size:17px;line-height:1.75;color:rgba(245,245,240,0.65);margin-bottom:48px}
+  .about-body strong{color:var(--white);font-weight:400}
+  .about-stats{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);border:1px solid var(--border)}
+  .stat{background:var(--black);padding:28px 24px}
+  .stat-num{font-family:'Bebas Neue',sans-serif;font-size:48px;line-height:1;letter-spacing:.02em}
+  .stat-label{font-size:12px;color:var(--grey);margin-top:6px;letter-spacing:.06em}
+  #services{border-top:1px solid var(--border)}
+  .services-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:80px}
+  .services-heading{font-family:'Bebas Neue',sans-serif;font-size:clamp(48px,5vw,80px);line-height:.95;max-width:500px}
+  .services-heading em{font-family:'Instrument Serif',serif;font-style:italic}
+  .services-intro{max-width:320px;font-size:15px;line-height:1.7;color:rgba(245,245,240,0.55);padding-bottom:8px}
+  .services-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--border);border:1px solid var(--border)}
+  .service-card{background:var(--black);padding:48px 40px;position:relative;overflow:hidden}
+  .service-card::before{content:'';position:absolute;inset:0;background:rgba(255,255,255,0.02);opacity:0;transition:opacity .3s}
+  .service-card:hover::before{opacity:1}
+  .service-num{font-family:'Bebas Neue',sans-serif;font-size:13px;letter-spacing:.15em;color:var(--grey);margin-bottom:24px}
+  .service-title{font-family:'Bebas Neue',sans-serif;font-size:36px;letter-spacing:.03em;margin-bottom:16px;line-height:1}
+  .service-desc{font-size:14px;line-height:1.7;color:rgba(245,245,240,0.5)}
+  #work{border-top:1px solid var(--border)}
+  .work-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:64px}
+  .work-heading{font-family:'Bebas Neue',sans-serif;font-size:clamp(48px,5vw,80px);line-height:.95}
+  .work-heading em{font-family:'Instrument Serif',serif;font-style:italic}
+  .work-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:2px}
+  .work-card{position:relative;overflow:hidden;background:#111;aspect-ratio:16/9;cursor:pointer}
+  .work-card:first-child{grid-column:1/-1;aspect-ratio:21/9}
+  .work-card img{width:100%;height:100%;object-fit:cover;transition:transform .5s ease;display:block}
+  .work-card:hover img{transform:scale(1.03)}
+  .work-card iframe.active-player{position:absolute;inset:0;width:100%;height:100%;border:none;z-index:2}
+  .work-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.85) 0%,transparent 50%);display:flex;flex-direction:column;justify-content:flex-end;padding:28px;opacity:0;transition:opacity .3s}
+  .work-card:hover .work-overlay{opacity:1}
+  .work-tag{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--grey);margin-bottom:6px}
+  .work-title{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:.04em}
+  .work-play-btn{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:56px;height:56px;background:rgba(255,255,255,0.12);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,0.2);border-radius:50%;display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .3s,transform .3s;pointer-events:none}
+  .work-card:hover .work-play-btn{opacity:1;transform:translate(-50%,-50%) scale(1.05)}
+  .work-play-btn svg{fill:white;width:20px;height:20px;margin-left:3px}
+  #testimonials{border-top:1px solid var(--border)}
+  .testi-heading{font-family:'Bebas Neue',sans-serif;font-size:clamp(48px,5vw,80px);line-height:.95;margin-bottom:64px}
+  .testi-heading em{font-family:'Instrument Serif',serif;font-style:italic}
+  .testi-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:var(--border);border:1px solid var(--border)}
+  .testi-card{background:var(--black);padding:48px 40px}
+  .testi-quote{font-size:17px;line-height:1.75;color:rgba(245,245,240,0.75);margin-bottom:32px;font-style:italic}
+  .testi-quote::before{content:'C';font-size:1.4em;line-height:0;vertical-align:-0.3em;margin-right:2px;opacity:0.4}
+  .testi-author{font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--grey)}
+  #contact{border-top:1px solid var(--border);text-align:center}
+  .contact-eyebrow{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--grey);margin-bottom:32px}
+  .contact-heading{font-family:'Bebas Neue',sans-serif;font-size:clamp(64px,10vw,140px);line-height:.9;letter-spacing:.01em;margin-bottom:48px}
+  .contact-heading em{font-family:'Instrument Serif',serif;font-style:italic}
+  .contact-actions{display:flex;gap:16px;justify-content:center;margin-bottom:80px;flex-wrap:wrap}
+  .contact-social{display:flex;gap:32px;justify-content:center;flex-wrap:wrap}
+  .social-link{color:var(--grey);text-decoration:none;font-size:12px;letter-spacing:.12em;text-transform:uppercase;transition:color .2s;display:flex;align-items:center;gap:8px}
+  .social-link:hover{color:var(--white)}
+  .social-link svg{width:14px;height:14px;fill:currentColor}
+  footer{border-top:1px solid var(--border);padding:32px 48px;display:flex;justify-content:space-between;align-items:center}
+  .footer-logo{font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:.12em;color:var(--grey);display:flex;align-items:center;gap:8px}
+  .footer-copy{font-size:12px;color:var(--grey);letter-spacing:.04em}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+  @keyframes fadeIn{from{opacity:0}to{opacity:1}}
+  @keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+  @keyframes scrollPulse{0%,100%{opacity:.4;transform:scaleY(1)}50%{opacity:1;transform:scaleY(0.6)}}
+  .reveal{opacity:0;transform:translateY(40px);transition:opacity .8s ease,transform .8s ease}
+  .reveal.visible{opacity:1;transform:translateY(0)}
+  @media(max-width:768px){
+    nav{padding:20px 24px}
+    .nav-links{display:none}
+    #hero{padding:0 24px 56px}
+    .hero-sub{flex-direction:column;align-items:flex-start}
+    section{padding:80px 24px}
+    #about{grid-template-columns:1fr;gap:40px}
+    .about-right{padding-top:0}
+    .services-header{flex-direction:column;align-items:flex-start;gap:24px}
+    .services-grid{grid-template-columns:1fr}
+    .work-grid{grid-template-columns:1fr}
+    .work-card:first-child{grid-column:1;aspect-ratio:16/9}
+    .testi-grid{grid-template-columns:1fr}
+    footer{flex-direction:column;gap:16px;text-align:center}
+    .hero-scroll-line{display:none}
+    .work-header{flex-direction:column;align-items:flex-start;gap:16px}
+  }
+</style>
+</head>
+<body>
+<div class="cursor" id="cursor"></div>
+<div class="cursor-follower" id="cursorFollower"></div>
+
+<nav id="nav">
+  <a href="#" class="nav-logo"><img src="data:image/png;base64,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" alt="Adly logo" style="width:28px;height:28px;object-fit:contain;vertical-align:middle;margin-right:8px;image-rendering:crisp-edges;"> ADLY</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#work">Work</a></li>
+    <li><a href="#testimonials">Clients</a></li>
+    <li><a href="https://wa.me/917355296797" target="_blank" class="nav-cta">Get A Quote</a></li>
+  </ul>
+</nav>
+
+<section id="hero">
+  <p class="hero-eyebrow">Motion Design Agency — Delhi, India · Remote Worldwide</p>
+  <h1 class="hero-headline">Motion Design<br>That Turns <em>SaaS</em><br>Into Sales</h1>
+  <div class="hero-sub">
+    <p class="hero-tagline">The visuals speak before you do.<br><strong>That's why we founded Adly.</strong></p>
+    <div class="hero-actions">
+      <a href="https://wa.me/917355296797" target="_blank" class="btn-primary">Get A Quote →</a>
+      <a href="#work" class="btn-ghost">See Our Work</a>
+    </div>
+  </div>
+  <div class="hero-scroll-line"><div class="scroll-line"></div><span>Scroll</span></div>
+</section>
+
+<div class="marquee-section">
+  <div class="marquee-track">
+    <span class="marquee-item">SaaS Explainers <span class="marquee-dot">✦</span></span>
+    <span class="marquee-item">App &amp; Web Ads <span class="marquee-dot">✦</span></span>
+    <span class="marquee-item">Promo Videos <span class="marquee-dot">✦</span></span>
+    <span class="marquee-item">Motion Graphics <span class="marquee-dot">✦</span></span>
+    <span class="marquee-item">Product Demos <span class="marquee-dot">✦</span></span>
+    <span class="marquee-item">Ad Creatives <span class="marquee-dot">✦</span></span>
+    <span class="marquee-item">SaaS Explainers <span class="marquee-dot">✦</span></span>
+    <span class="marquee-item">App &amp; Web Ads <span class="marquee-dot">✦</span></span>
+    <span class="marquee-item">Promo Videos <span class="marquee-dot">✦</span></span>
+    <span class="marquee-item">Motion Graphics <span class="marquee-dot">✦</span></span>
+    <span class="marquee-item">Product Demos <span class="marquee-dot">✦</span></span>
+    <span class="marquee-item">Ad Creatives <span class="marquee-dot">✦</span></span>
+  </div>
+</div>
+
+<section id="about">
+  <div class="about-left reveal">
+    <p class="section-label">About</p>
+    <h2 class="about-heading">We Make<br><em>Products</em><br>Feel Alive</h2>
+  </div>
+  <div class="about-right reveal">
+    <p class="about-body">Adly is a motion design agency built for <strong>SaaS founders and product teams</strong> who know that a great product deserves great visuals. We craft animations that explain, convert, and stop the scroll — so your product speaks before you do.<br><br>Founded by <strong>Amit</strong> and a small, obsessive team — we work remotely with teams across the world from our base in Delhi, India.</p>
+    <div class="about-stats">
+      <div class="stat"><div class="stat-num">4+</div><div class="stat-label">Projects Delivered</div></div>
+      <div class="stat"><div class="stat-num">100%</div><div class="stat-label">Client Satisfaction</div></div>
+      <div class="stat"><div class="stat-num">48h</div><div class="stat-label">Avg. Turnaround</div></div>
+      <div class="stat"><div class="stat-num">∞</div><div class="stat-label">Obsession for Motion</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="services">
+  <div class="services-header reveal">
+    <h2 class="services-heading">What<br>We <em>Do</em></h2>
+    <p class="services-intro">From explainer videos to scroll-stopping ads — we handle the full motion stack for your SaaS.</p>
+  </div>
+  <div class="services-grid reveal">
+    <div class="service-card"><div class="service-num">01</div><div class="service-title">SaaS Motion Graphics &amp; Explainers</div><p class="service-desc">Turn complex features into clear, compelling narratives. We make your product's value instantly understood — no manual required.</p></div>
+    <div class="service-card"><div class="service-num">02</div><div class="service-title">App &amp; Web Ads</div><p class="service-desc">High-converting motion ads designed for Meta, Google, and LinkedIn. Built to stop the scroll and drive installs, signups, and demos.</p></div>
+    <div class="service-card"><div class="service-num">03</div><div class="service-title">Product Promo Videos</div><p class="service-desc">Launch-ready product videos that live on your homepage, pitch decks, and investor updates. First impressions, perfected.</p></div>
+    <div class="service-card"><div class="service-num">04</div><div class="service-title">UI &amp; Feature Animations</div><p class="service-desc">Animated walkthroughs of your product's UI — perfect for onboarding flows, sales decks, and product hunt launches.</p></div>
+  </div>
+</section>
+
+<section id="work">
+  <div class="work-header reveal">
+    <h2 class="work-heading">Selected<br><em>Work</em></h2>
+    <a href="https://www.youtube.com/@adlycommercials" target="_blank" class="btn-ghost" style="font-size:13px;padding:10px 24px;">View All →</a>
+  </div>
+  <div class="work-grid reveal">
+    <div class="work-card lite-yt" data-id="OVW_zBZuAtw">
+      <img src="https://img.youtube.com/vi/OVW_zBZuAtw/maxresdefault.jpg" alt="SaaS Explainer" loading="lazy">
+      <div class="work-play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+      <div class="work-overlay"><p class="work-tag">SaaS Explainer</p><p class="work-title">Feature Walkthrough</p></div>
+    </div>
+    <div class="work-card lite-yt" data-id="OpBXBq1JDOc">
+      <img src="https://img.youtube.com/vi/OpBXBq1JDOc/maxresdefault.jpg" alt="Product Promo" loading="lazy">
+      <div class="work-play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+      <div class="work-overlay"><p class="work-tag">Product Promo</p><p class="work-title">App Demo</p></div>
+    </div>
+    <div class="work-card lite-yt" data-id="ZCUR_q0j3uk">
+      <img src="https://img.youtube.com/vi/ZCUR_q0j3uk/maxresdefault.jpg" alt="Motion Graphics" loading="lazy">
+      <div class="work-play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+      <div class="work-overlay"><p class="work-tag">Motion Graphics</p><p class="work-title">UI Animation</p></div>
+    </div>
+    <div class="work-card lite-yt" data-id="3ELPPllL_6Q">
+      <img src="https://img.youtube.com/vi/3ELPPllL_6Q/maxresdefault.jpg" alt="Ad Creative" loading="lazy">
+      <div class="work-play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+      <div class="work-overlay"><p class="work-tag">Ad Creative</p><p class="work-title">SaaS Promo</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="testimonials">
+  <h2 class="testi-heading reveal">What<br>Clients <em>Say</em></h2>
+  <div class="testi-grid reveal">
+    <div class="testi-card">
+      <p class="testi-quote">Good one, gave a very good output as our first work together and I have founders asking me about Motion Design regularly, I'm gonna start referring him to them.</p>
+      <p class="testi-author">— Shivam S.</p>
+    </div>
+    <div class="testi-card">
+      <p class="testi-quote">Great videos, he did exactly what I wanted with the videos based off the inspiration and direction. 10/10, would recommend.</p>
+      <p class="testi-author">— Daniel D.</p>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <p class="contact-eyebrow reveal">Ready to start?</p>
+  <h2 class="contact-heading reveal">Let's Build<br>Something <em>Great</em></h2>
+  <div class="contact-actions reveal">
+    <a href="https://wa.me/917355296797" target="_blank" class="btn-primary">Chat on WhatsApp →</a>
+    <a href="mailto:adlycommercials@gmail.com" class="btn-ghost">Send an Email</a>
+  </div>
+  <div class="contact-social reveal">
+    <a href="https://instagram.com/adly.commercials" target="_blank" class="social-link"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>Instagram</a>
+    <a href="https://linkedin.com/company/adlycommercials" target="_blank" class="social-link"><svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>LinkedIn</a>
+    <a href="https://x.com/adlycommercials" target="_blank" class="social-link"><svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.737-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>X / Twitter</a>
+    <a href="mailto:adlycommercials@gmail.com" class="social-link"><svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>Email</a>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo"><img src="data:image/png;base64,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" alt="Adly logo" style="width:28px;height:28px;object-fit:contain;vertical-align:middle;margin-right:8px;image-rendering:crisp-edges;"> ADLY COMMERCIALS</div>
+  <p class="footer-copy">© 2025 Adly Commercials. Delhi, India · Remote Worldwide.</p>
+</footer>
+
+<script>
+  const cursor = document.getElementById('cursor');
+  const follower = document.getElementById('cursorFollower');
+  let mx=0,my=0,fx=0,fy=0;
+  document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cursor.style.left=mx+'px';cursor.style.top=my+'px';});
+  function animFollower(){fx+=(mx-fx)*.12;fy+=(my-fy)*.12;follower.style.left=fx+'px';follower.style.top=fy+'px';requestAnimationFrame(animFollower);}
+  animFollower();
+  document.querySelectorAll('a,button,.work-card,.service-card').forEach(el=>{
+    el.addEventListener('mouseenter',()=>{follower.style.width='60px';follower.style.height='60px';follower.style.borderColor='rgba(255,255,255,0.6)';});
+    el.addEventListener('mouseleave',()=>{follower.style.width='36px';follower.style.height='36px';follower.style.borderColor='rgba(255,255,255,0.4)';});
+  });
+  const nav=document.getElementById('nav');
+  window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',window.scrollY>40));
+  const reveals=document.querySelectorAll('.reveal');
+  const observer=new IntersectionObserver(entries=>{entries.forEach((entry,i)=>{if(entry.isIntersecting)setTimeout(()=>entry.target.classList.add('visible'),i*80);});},{threshold:0.1});
+  reveals.forEach(el=>observer.observe(el));
+  document.querySelectorAll('.lite-yt').forEach(card=>{
+    card.addEventListener('click',function(){
+      const id=this.dataset.id;
+      if(this.querySelector('iframe'))return;
+      const img=this.querySelector('img');
+      const overlay=this.querySelector('.work-overlay');
+      const btn=this.querySelector('.work-play-btn');
+      if(img)img.style.opacity='0';
+      if(overlay)overlay.style.opacity='0';
+      if(btn)btn.style.opacity='0';
+      const iframe=document.createElement('iframe');
+      iframe.src=`https://www.youtube.com/embed/${id}?autoplay=1&rel=0`;
+      iframe.allow='autoplay; fullscreen';
+      iframe.allowFullscreen=true;
+      iframe.style.cssText='position:absolute;inset:0;width:100%;height:100%;border:none;z-index:2;';
+      this.appendChild(iframe);
+    });
+  });
+</script>
+</body>
+</html>
