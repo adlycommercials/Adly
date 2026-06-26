@@ -4,73 +4,129 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css">
+<title>Selected Work</title>
 
 <style>
-body{
+*{
     margin:0;
-    background:#080808;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    min-height:100vh;
-    font-family:sans-serif;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    background:#090909;
+    color:white;
+    font-family:Inter,sans-serif;
+    padding:60px 20px;
+}
+
+.container{
+    max-width:1200px;
+    margin:auto;
+}
+
+h1{
+    font-size:48px;
+    margin-bottom:40px;
+}
+
+.video-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(420px,1fr));
+    gap:28px;
 }
 
 .player{
-    width:min(1000px,90vw);
-    border-radius:20px;
+    background:#111;
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:18px;
     overflow:hidden;
-    box-shadow:0 20px 60px rgba(0,0,0,.45);
+    transition:.3s;
 }
 
-.plyr{
-    --plyr-color-main:#ffffff;
-    --plyr-video-controls-background:rgba(15,15,15,.7);
-    --plyr-menu-background:#111;
-    --plyr-menu-color:#fff;
-    border-radius:20px;
+.player:hover{
+    transform:translateY(-4px);
+    border-color:rgba(255,255,255,.2);
 }
 
-.plyr__control{
-    border-radius:999px;
+.player iframe{
+    width:100%;
+    aspect-ratio:16/9;
+    border:0;
+    display:block;
 }
 
-.plyr--full-ui input[type=range]{
-    color:white;
+.info{
+    padding:18px;
+}
+
+.info h3{
+    font-size:18px;
+    margin-bottom:6px;
+}
+
+.info p{
+    color:#888;
+    font-size:14px;
 }
 </style>
+
 </head>
 <body>
 
-<div class="player">
-    <video
-        id="player"
-        playsinline
-        controls
-        poster="https://res.cloudinary.com/djn3aak43/video/upload/so_0/New_Project_455_F592CBF_nflpdv.jpg">
+<div class="container">
 
-        <source
-        src="https://res.cloudinary.com/djn3aak43/video/upload/q_auto,f_auto/New_Project_455_F592CBF_nflpdv.mp4"
-        type="video/mp4">
-    </video>
+<h1>Selected Work</h1>
+
+<div class="video-grid">
+
+<div class="player">
+<iframe
+src="https://www.youtube.com/embed/qKpWNnkiqx8"
+allowfullscreen>
+</iframe>
+<div class="info">
+<h3>SaaS Explainer</h3>
+<p>Feature Walkthrough</p>
+</div>
 </div>
 
-<script src="https://cdn.plyr.io/3.7.8/plyr.js"></script>
+<div class="player">
+<iframe
+src="https://www.youtube.com/embed/3y29_d1MtZo"
+allowfullscreen>
+</iframe>
+<div class="info">
+<h3>Product Promo</h3>
+<p>App Demo</p>
+</div>
+</div>
 
-<script>
-new Plyr('#player', {
-    controls: [
-        'play-large',
-        'play',
-        'progress',
-        'current-time',
-        'mute',
-        'volume',
-        'fullscreen'
-    ]
-});
-</script>
+<div class="player">
+<iframe
+src="https://www.youtube.com/embed/OW__BZUAtvw"
+allowfullscreen>
+</iframe>
+<div class="info">
+<h3>Motion Graphics</h3>
+<p>UI Animation</p>
+</div>
+</div>
+
+<div class="player">
+<iframe
+src="https://www.youtube.com/embed/GBILZ57KRdk"
+allowfullscreen>
+</iframe>
+<div class="info">
+<h3>Ad Creative</h3>
+<p>SaaS Promo</p>
+</div>
+</div>
+
+</div>
+
+</div>
 
 </body>
 </html>
